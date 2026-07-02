@@ -15,7 +15,7 @@ body{
 
 }
 .fa-compass{
-    color:#fe424d;
+    color:#ff385c;
     font-size: 2rem;
 }
 
@@ -85,12 +85,12 @@ body{
 
 /* new page */
 .addbtn{
-    background-color: #fe424d !important;
+    background-color: #ff385c !important;
     border: none !important ;
 }
 /* edit page  */
 .editBtn{
-     background-color: #fe424d !important;
+     background-color: #ff385c!important;
      border: none !important ;
 }
 
@@ -104,4 +104,61 @@ display: flex;
 .showCard{
     padding-left: 0;
     padding-right: 0;
+}
+
+/* map */
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* search bar  */
+
+.search-bar{
+    
+    width: 550px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    padding: 6px;
+    background: white;
+}
+
+.search-input{
+    border: none !important;
+    box-shadow: none !important;
+    width: 250px;
+    padding-left: 0.5rem 3rem 0.5rem 3rem;
+}
+
+.search-input:focus{
+    box-shadow: none !important;
+}
+
+/* Airbnb Search Button */
+.search-btn{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background-color: #FF385C;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-btn:hover{
+    background-color: #E31C5F;
+}
+
+.search-btn i{
+    font-size: 16px;
 }

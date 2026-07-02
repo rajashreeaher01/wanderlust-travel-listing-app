@@ -1,4 +1,6 @@
 const Listing = require("../models/listing.js");
+const axios = require("axios");
+const API_KEY = process.env.MAPTILER_API_KEY;
 
 module.exports.index = async(req , res)=>{
     const alllistings = await Listing.find({});
@@ -23,13 +25,32 @@ module.exports.showListing = async(req , res)=>{
 
 module.exports.createListing = async(req , res)=>{
     // let{title, description , price , image , loaction , country} = req.body
+
+    async function geocodeLocation(location) {
+
+        const url =
+        `https://api.maptiler.com/geocoding/${encodeURIComponent(location)}.json?key=${API_KEY}&limit=1`;
+
+        const response = await axios.get(url);
+        if (response.data.features.length === 0) {
+        return null;
+        }
+        return response.data.features[0].geometry ; 
+};
+   
+    let geometry = await geocodeLocation(req.body.listing.location);
+
     let {path : url , filename } = req.file;
-    
+
     let listing = req.body.listing;
     const newlisting = new Listing(listing);
     newlisting.owner = req.user._id;
     newlisting.image = {url , filename};
-    await newlisting.save();
+    newlisting.geometry = geometry;
+
+    let savedlisting = await newlisting.save();
+    console.log(savedlisting);
+
     req.flash("success" , "New Listing Created !");
     res.redirect("/listings");
    
